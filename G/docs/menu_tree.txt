@@ -1,0 +1,126 @@
+@startuml
+
+title PartTimePro Menu Structure
+
+skinparam {
+  ArrowColor #2C3E50
+  ActorBorderColor #2C3E50
+  PackageBackgroundColor #ECF0F1
+  PackageBorderColor #BDC3C7
+  PackageStyle rectangle
+}
+
+' Set top to bottom direction
+top to bottom direction
+
+package "Public Access" {
+  [Home] as home
+  package "Authentication" {
+    [Login] as login
+    [Jobseeker Registration] as jsReg
+    [Employer Registration] as empReg
+  }
+}
+
+package "Jobseeker Portal" {
+  package "Dashboard" {
+    [Overview of Applications & Saved Jobs] as jsOverview
+  }
+  
+  package "Jobs" {
+    [Browse Jobs] as browseJobs
+    [Search Jobs] as searchJobs
+    [View Job Details] as viewJobDetails
+  }
+  
+  package "Applications" {
+    [View All Applications] as viewApps
+    [Application Status] as appStatus
+  }
+  
+  package "Messages" {
+    [Inbox] as jsInbox
+    [Communication with Employers] as jsComm
+  }
+  
+  package "Profile" {
+    [Personal Information] as personalInfo
+    [Resume/CV] as resume
+    [Skills & Experience] as skills
+    [Education] as education
+  }
+  
+  [Logout] as jsLogout
+}
+
+package "Employer Portal" {
+  package "Dashboard" {
+    [Overview of Posted Jobs & Applications] as empOverview
+  }
+  
+  package "Jobs Management" {
+    [Post New Job] as postJob
+    [Edit Job Listings] as editJobs
+    [View All Jobs] as viewJobs
+    [Job Status Management] as jobStatus
+  }
+  
+  package "Applications" as empApps {
+    [View All Applications] as empViewApps
+    [Review Applications] as reviewApps
+    [Update Application Status] as updateStatus
+  }
+  
+  package "Messages" as empMessages {
+    [Inbox] as empInbox
+    [Communication with Candidates] as empComm
+  }
+  
+  package "Company Profile" {
+    [Company Information] as companyInfo
+    [Company Logo] as logo
+    [Contact Details] as contact
+  }
+  
+  [Logout] as empLogout
+}
+
+' Layout and connections with vertical flow
+home -down-> login
+login -down-> jsReg
+login -down-> empReg
+
+login -down-> jsOverview
+jsOverview -down-> browseJobs
+browseJobs -down-> searchJobs
+searchJobs -down-> viewJobDetails
+
+jsOverview -down-> viewApps
+viewApps -down-> appStatus
+
+jsOverview -down-> jsInbox
+jsInbox -down-> jsComm
+
+jsOverview -down-> personalInfo
+personalInfo -down-> resume
+resume -down-> skills
+skills -down-> education
+
+login -down-> empOverview
+empOverview -down-> postJob
+postJob -down-> editJobs
+editJobs -down-> viewJobs
+viewJobs -down-> jobStatus
+
+empOverview -down-> empViewApps
+empViewApps -down-> reviewApps
+reviewApps -down-> updateStatus
+
+empOverview -down-> empInbox
+empInbox -down-> empComm
+
+empOverview -down-> companyInfo
+companyInfo -down-> logo
+logo -down-> contact
+
+@enduml
